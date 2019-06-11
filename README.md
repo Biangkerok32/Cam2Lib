@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/wwdablu/Cam2Lib.svg)](https://jitpack.io/#wwdablu/Cam2Lib)  
+
 # Cam2Lib
 An android library allowing the usage of camera2 API easily without the much boilerplate code.  
 
