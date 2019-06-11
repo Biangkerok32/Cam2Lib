@@ -1,6 +1,15 @@
 # Cam2Lib
 An android library allowing the usage of camera2 API easily without the much boilerplate code.  
 
+## Gradle  
+~~~  
+maven { url 'https://jitpack.io' }
+
+dependencies {
+    implementation 'com.github.wwdablu:Cam2Lib:x.y.z'
+}
+~~~
+
 ## Usage  
 To use the library, we need to create an object of the Cam2Lib class and then provide a TextureView to draw on it.  
 ~~~
