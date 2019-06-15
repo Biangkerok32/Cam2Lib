@@ -12,6 +12,7 @@ import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.media.Image;
 import android.media.ImageReader;
 import android.os.Build;
 import android.os.Handler;
@@ -374,8 +375,14 @@ public final class Cam2Lib {
         }
     }
 
-    private ImageReader.OnImageAvailableListener onImageAvailable = imageReader ->
-        mCallback.onImage(imageReader.acquireLatestImage());
+    private ImageReader.OnImageAvailableListener onImageAvailable = new ImageReader.OnImageAvailableListener() {
+        @Override
+        public void onImageAvailable(ImageReader imageReader) {
+            Image image = imageReader.acquireLatestImage();
+            mCallback.onImage(image);
+            image.close();
+        }
+    };
 
     private class BiggestFinder implements Comparator<Size> {
         @Override

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraDevice;
 import android.media.Image;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -51,6 +52,13 @@ public class MainActivity extends AppCompatActivity implements Cam2LibCallback {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        cam2Lib.stopPreview();
+        cam2Lib.close();
+        finish();
+    }
+
     private void prepare() {
 
         cam2Lib = new Cam2Lib(this, this);
@@ -82,8 +90,16 @@ public class MainActivity extends AppCompatActivity implements Cam2LibCallback {
         findViewById(R.id.texv_capture).setVisibility(View.GONE);
         mImageView.setVisibility(View.VISIBLE);
         mImageView.setImageBitmap(Cam2LibConverter.toBitmap(image));
+        findViewById(R.id.btn_capture).setVisibility(View.GONE);
 
-        cam2Lib.close();
+        new Handler().postDelayed(() -> {
+            findViewById(R.id.texv_capture).setVisibility(View.VISIBLE);
+            mImageView.setVisibility(View.GONE);
+            findViewById(R.id.btn_capture).setVisibility(View.VISIBLE);
+            cam2Lib.startPreview();
+        }, 3000);
+
+        //cam2Lib.close();
     }
 
     @Override
