@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements Cam2LibCallback {
 
         findViewById(R.id.texv_capture).setVisibility(View.GONE);
         mImageView.setVisibility(View.VISIBLE);
-        mImageView.setImageBitmap(Cam2LibConverter.toBitmap(image));
+        mImageView.setImageBitmap(Cam2LibConverter.toBitmap(image, false));
         findViewById(R.id.btn_capture).setVisibility(View.GONE);
 
         new Handler().postDelayed(() -> {
